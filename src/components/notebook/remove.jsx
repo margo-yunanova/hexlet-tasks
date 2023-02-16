@@ -4,8 +4,8 @@ import { Modal, FormGroup, Form, Button } from 'react-bootstrap';
 const Remove = ({ showRemoveModal, setShowRemoveModal, removeTask }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    removeTask()
-    setShowRemoveModal(false)
+    removeTask();
+    setShowRemoveModal(false);
   }
 
   return (
@@ -15,7 +15,7 @@ const Remove = ({ showRemoveModal, setShowRemoveModal, removeTask }) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <FormGroup className="mb-3" controlId="formAddTask">
+          <FormGroup className="mb-3" controlId="formRemoveTask">
           <Button
             variant="danger"
             type="submit"
