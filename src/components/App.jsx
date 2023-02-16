@@ -2,8 +2,11 @@ import styles from './App.module.css';
 import Button from './Button';
 import TableComponent from './table/table';
 import { tableInfo } from '../utils/constants';
+import Task from './notebook/task';
 
 function App() {
+
+
   return (
     <div>
       <h2 className={styles.title}>Решение задач по блоку React Hooks</h2>
@@ -11,6 +14,8 @@ function App() {
       <Button count={7} />
       <h3 className={styles.title}>Таблица с возможностью сортировки по столбцам</h3>
       <TableComponent list={tableInfo} />
+      <h3 className={styles.title}>Записная книжка</h3>
+      <Task />
     </div>
   );
 }
