@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { Modal, FormGroup, FormControl, Button, Form } from "react-bootstrap";
 
-const Add = ({ showAddModal, setShowAddModal, setTasks }) => {
+const Add = ({ showAddModal, setShowAddModal, addTask }) => {
   const inputRef = useRef(null);
 
-  const addTask = (evt) => {
+  const closeModal = (evt) => {
     evt.preventDefault();
-    setTasks(tasks => [...tasks, inputRef.current.value]);
+    addTask(inputRef.current.value)
     setShowAddModal(false);
   };
 
@@ -23,7 +23,7 @@ const Add = ({ showAddModal, setShowAddModal, setTasks }) => {
           <Button
             variant="primary"
             type="submit"
-            onClick={addTask}
+            onClick={closeModal}
           >
             OK
           </Button>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Modal, FormGroup, Form, Button } from 'react-bootstrap';
 
-const Remove = ({ showRemoveModal, setShowRemoveModal, indexTask, setTasks}) => {
+const Remove = ({ showRemoveModal, setShowRemoveModal, removeTask }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setTasks(tasks => tasks.filter((_, i) => i !== indexTask ));
+    removeTask()
     setShowRemoveModal(false)
   }
 

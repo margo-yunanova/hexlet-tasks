@@ -14,12 +14,24 @@ const Task = () => {
   const [tasks, setTasks] = useState([]);
   const [indexTask, setIndexTask] = useState('');
 
-  const renameTask = (index) => {
+  const addTask = (newTask) => {
+    setTasks(tasks => [...tasks, newTask]);
+  };
+
+  const renameTask = (renameTask) => {
+    setTasks(tasks.map((task, i) => i === indexTask ? renameTask : task ))
+  };
+
+  const removeTask = () => {
+    setTasks(tasks => tasks.filter((_, i) => i !== indexTask ))
+  };
+
+  const openRenameModal = (index) => {
     setShowRenameModal(true)
     setIndexTask(index);
   }
 
-  const removeTask = (index) => {
+  const openRemoveModal = (index) => {
     setShowRemoveModal(true)
     setIndexTask(index);
   }
@@ -35,8 +47,8 @@ const Task = () => {
             <ListGroup.Item as="li" key={i}>
               {task}
               <ButtonGroup className="ml-5" aria-label="Basic example">
-                <Button variant="secondary" onClick={() => renameTask(i)}>Rename</Button>
-                <Button variant="secondary" onClick={() => removeTask(i)}>Remove</Button>
+                <Button variant="secondary" onClick={() => openRenameModal(i)}>Rename</Button>
+                <Button variant="secondary" onClick={() => openRemoveModal(i)}>Remove</Button>
               </ButtonGroup>
             </ListGroup.Item>
           ))}
@@ -45,21 +57,20 @@ const Task = () => {
       <Add
         showAddModal={showAddModal}
         setShowAddModal={setShowAddModal}
-        setTasks={setTasks}
+        addTask={addTask}
       />
       <Rename
         showRenameModal={showRenameModal}
         setShowRenameModal={setShowRenameModal}
         renameTask={renameTask}
-        indexTask={indexTask}
         tasks={tasks}
+        indexTask={indexTask}
         setTasks={setTasks}
       />
       <Remove
         showRemoveModal={showRemoveModal}
         setShowRemoveModal={setShowRemoveModal}
-        indexTask={indexTask}
-        setTasks={setTasks}
+        removeTask={removeTask}
       />
     </>
   );

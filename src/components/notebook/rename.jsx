@@ -1,13 +1,13 @@
 import { useRef } from "react";
 import { Modal, FormGroup, FormControl, Button, Form } from "react-bootstrap";
 
-const Rename = ({ showRenameModal, setShowRenameModal, indexTask, tasks, setTasks }) => {
-  const formRef = useRef();
+const Rename = ({ showRenameModal, setShowRenameModal, renameTask, tasks, indexTask }) => {
+  const inputRef = useRef();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setTasks(tasks.map((task, i) => i === indexTask ? formRef.current.value : task ));
-    setShowRenameModal(false)
+    renameTask(inputRef.current.value);
+    setShowRenameModal(false);
   }
 
   return (
@@ -18,7 +18,7 @@ const Rename = ({ showRenameModal, setShowRenameModal, indexTask, tasks, setTask
       <Modal.Body>
         <Form>
           <FormGroup className="mb-3" controlId="formRenameTask">
-            <FormControl ref={formRef} defaultValue={tasks[indexTask]} autoFocus={true}/>
+            <FormControl ref={inputRef} defaultValue={tasks[indexTask]} autoFocus={true}/>
           </FormGroup>
           <Button
             variant="primary"
