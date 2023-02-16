@@ -9,7 +9,7 @@ const Add = ({ show, setShow, addTasks, inputRef }) => {
       <Modal.Body>
         <Form>
           <FormGroup className="mb-3" controlId="formAddTask">
-            <FormControl ref={inputRef} />
+            <FormControl ref={inputRef} autoFocus={true} />
           </FormGroup>
           <Button
             variant="primary"

@@ -5,12 +5,14 @@ import getModal from "./index";
 const Task = () => {
   const Add = getModal("adding");
   const Rename = getModal('renaming');
+  const Remove = getModal('removing');
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showRenameModal, setShowRenameModal] = useState(false);
+  const [showRemoveModal, setShowRemoveModal] = useState(false);
 
   const [tasks, setTasks] = useState([]);
-  const [changedTask, setChangedTask] = useState('');
+  const [indexTask, setIndexTask] = useState('');
 
   const inputRef = useRef(null);
 
@@ -20,9 +22,14 @@ const Task = () => {
     setShowAddModal(false);
   };
 
-  const renameTask = (task) => {
+  const renameTask = (index) => {
     setShowRenameModal(true)
-    setChangedTask(task);
+    setIndexTask(index);
+  }
+
+  const removeTask = (index) => {
+    setShowRemoveModal(true)
+    setIndexTask(index);
   }
 
   return (
@@ -36,8 +43,8 @@ const Task = () => {
             <ListGroup.Item as="li" key={i}>
               {task}
               <ButtonGroup className="ml-5" aria-label="Basic example">
-                <Button variant="secondary" onClick={() => renameTask(task)}>Rename</Button>
-                <Button variant="secondary">Remove</Button>
+                <Button variant="secondary" onClick={() => renameTask(i)}>Rename</Button>
+                <Button variant="secondary" onClick={() => removeTask(i)}>Remove</Button>
               </ButtonGroup>
             </ListGroup.Item>
           ))}
@@ -53,7 +60,14 @@ const Task = () => {
         show={showRenameModal}
         setShow={setShowRenameModal}
         renameTask={renameTask}
-        changedTask={changedTask}
+        indexTask={indexTask}
+        tasks={tasks}
+        setTasks={setTasks}
+      />
+      <Remove
+        show={showRemoveModal}
+        setShow={setShowRemoveModal}
+        indexTask={indexTask}
         tasks={tasks}
         setTasks={setTasks}
       />

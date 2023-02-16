@@ -9,12 +9,12 @@ function App() {
 
   return (
     <div>
-      <h2 className={styles.title}>Решение задач по блоку React Hooks</h2>
-      <h3 className={styles.title}>Радио кнопки</h3>
+      <h2 className={styles.title}>Solutions using the React Hooks</h2>
+      <h3 className={styles.title}>Radio buttons</h3>
       <Button count={7} />
-      <h3 className={styles.title}>Таблица с возможностью сортировки по столбцам</h3>
+      <h3 className={styles.title}>Table sortable by columns</h3>
       <TableComponent list={tableInfo} />
-      <h3 className={styles.title}>Записная книжка</h3>
+      <h3 className={styles.title}>Notebook</h3>
       <Task />
     </div>
   );
