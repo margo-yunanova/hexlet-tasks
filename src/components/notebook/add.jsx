@@ -1,12 +1,13 @@
-import { useRef } from "react";
+import { useState } from "react";
 import { Modal, FormGroup, FormControl, Button, Form } from "react-bootstrap";
 
 const Add = ({ showAddModal, setShowAddModal, addTask }) => {
-  const inputRef = useRef(null);
+  const [task, setTask] = useState('');
 
   const closeModal = (evt) => {
     evt.preventDefault();
-    addTask(inputRef.current.value)
+    addTask(task);
+    setTask('');
     setShowAddModal(false);
   };
 
@@ -16,14 +17,13 @@ const Add = ({ showAddModal, setShowAddModal, addTask }) => {
         <Modal.Title>Add task</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={closeModal}>
           <FormGroup className="mb-3" controlId="formAddTask">
-            <FormControl ref={inputRef} autoFocus={true} />
+            <FormControl value={task} onChange={e => setTask(e.target.value)} autoFocus={true} />
           </FormGroup>
           <Button
             variant="primary"
             type="submit"
-            onClick={closeModal}
           >
             OK
           </Button>
