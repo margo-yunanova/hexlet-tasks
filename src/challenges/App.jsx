@@ -1,5 +1,5 @@
 import styles from './App.module.css';
-import Button from './Button';
+import Button from './radio buttons/Button';
 import TableComponent from './table/table';
 import { tableInfo } from '../utils/constants';
 import Task from './notebook/task';
