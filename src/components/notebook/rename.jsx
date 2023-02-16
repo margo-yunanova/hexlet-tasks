@@ -1,17 +1,17 @@
 import { useRef } from "react";
 import { Modal, FormGroup, FormControl, Button, Form } from "react-bootstrap";
 
-const Rename = ({ show, setShow, indexTask, tasks, setTasks }) => {
+const Rename = ({ showRenameModal, setShowRenameModal, indexTask, tasks, setTasks }) => {
   const formRef = useRef();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setTasks(tasks.map((task, i) => i === indexTask ? formRef.current.value : task ));
-    setShow(false)
+    setShowRenameModal(false)
   }
 
   return (
-    <Modal show={show} onHide={() => setShow(false)}>
+    <Modal show={showRenameModal} onHide={() => setShowRenameModal(false)}>
       <Modal.Header closeButton>
         <Modal.Title>Rename task</Modal.Title>
       </Modal.Header>

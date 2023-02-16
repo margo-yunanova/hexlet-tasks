@@ -1,15 +1,15 @@
 import React from 'react';
 import { Modal, FormGroup, Form, Button } from 'react-bootstrap';
 
-const Remove = ({ show, setShow, indexTask, tasks, setTasks}) => {
+const Remove = ({ showRemoveModal, setShowRemoveModal, indexTask, setTasks}) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setTasks(tasks.filter((task, i) => i !== indexTask ));
-    setShow(false)
+    setTasks(tasks => tasks.filter((_, i) => i !== indexTask ));
+    setShowRemoveModal(false)
   }
 
   return (
-    <Modal show={show} onHide={() => setShow(false)}>
+    <Modal show={showRemoveModal} onHide={() => setShowRemoveModal(false)}>
       <Modal.Header closeButton>
         <Modal.Title>Do you want to remove the task?</Modal.Title>
       </Modal.Header>
@@ -19,7 +19,7 @@ const Remove = ({ show, setShow, indexTask, tasks, setTasks}) => {
           <Button
             variant="danger"
             type="submit"
-            onClick={(evt) => handleSubmit(evt)}
+            onClick={handleSubmit}
           >
             Yes
           </Button>

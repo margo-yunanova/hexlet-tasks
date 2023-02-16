@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Button, ListGroup, ButtonGroup } from "react-bootstrap";
 import getModal from "./index";
 
@@ -13,14 +13,6 @@ const Task = () => {
 
   const [tasks, setTasks] = useState([]);
   const [indexTask, setIndexTask] = useState('');
-
-  const inputRef = useRef(null);
-
-  const addTask = (evt) => {
-    evt.preventDefault();
-    setTasks([...tasks, inputRef.current.value]);
-    setShowAddModal(false);
-  };
 
   const renameTask = (index) => {
     setShowRenameModal(true)
@@ -51,24 +43,22 @@ const Task = () => {
         </ListGroup>
       )}
       <Add
-        show={showAddModal}
-        setShow={setShowAddModal}
-        addTasks={addTask}
-        inputRef={inputRef}
+        showAddModal={showAddModal}
+        setShowAddModal={setShowAddModal}
+        setTasks={setTasks}
       />
       <Rename
-        show={showRenameModal}
-        setShow={setShowRenameModal}
+        showRenameModal={showRenameModal}
+        setShowRenameModal={setShowRenameModal}
         renameTask={renameTask}
         indexTask={indexTask}
         tasks={tasks}
         setTasks={setTasks}
       />
       <Remove
-        show={showRemoveModal}
-        setShow={setShowRemoveModal}
+        showRemoveModal={showRemoveModal}
+        setShowRemoveModal={setShowRemoveModal}
         indexTask={indexTask}
-        tasks={tasks}
         setTasks={setTasks}
       />
     </>
