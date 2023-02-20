@@ -4,50 +4,26 @@ import TableCells from "./table-cells";
 import TableRow from "./table-row";
 import TableBody from "./table-body";
 import TableHead from "./table-head";
-
-const sortList = (sortedList, sortDirection, sortedColumn) => {
-  const list = [...sortedList]
-  if (sortDirection === '🠑') {
-    list.sort((a, b) => {
-      if (a[sortedColumn] > b[sortedColumn]) return 1;
-      if (a[sortedColumn] < b[sortedColumn]) return -1;
-      return 0
-    })
-  } else {
-    list.sort((a, b) => {
-      if (a[sortedColumn] < b[sortedColumn]) return 1;
-      if (a[sortedColumn] > b[sortedColumn]) return -1;
-      return 0
-    })
-  }
-  return list
-};
-
-
+import { sortList } from "../../utils/constants";
 
 const TableComponent = ({ list }) => {
   const [lastClickedTitle, setLastClickedTitle] = useState(null);
-  const [arrow, setArrow] = useState(null);
-  const [sortedList, setSortedList] = useState(list);
-  const [title, setTitle] = useState('')
+  const [sortDirection, setSortDirection] = useState(null);
 
-  //const sortedList = useMemo(() => sort(list, arrow, lastClickedTitle), [list, arrow, title])
+  const sortedList = useMemo(() => !sortDirection ? list : sortList(list, sortDirection, lastClickedTitle), [list, sortDirection, lastClickedTitle])
 
-
-  const sort = (title) => {
-    if (title !== lastClickedTitle || arrow === '🠓') {
+  const changeSortDirection = (title) => {
+    if (title !== lastClickedTitle || sortDirection === 'descending') {
       setLastClickedTitle(title);
-      setArrow('🠑');
-      setSortedList(sortList(list, '🠑', title));
+      setSortDirection('ascending');
     } else {
-      setArrow('🠓');
-      setSortedList(sortList(list, '🠓', title));
+      setSortDirection('descending');
     };
   };
 
   return (
     <Table striped bordered hover>
-      <TableHead sortedList={sortedList} sort={sort} setTitle={setTitle} arrow={arrow} lastClickedTitle={lastClickedTitle} />
+      <TableHead sortedList={sortedList} changeSortDirection={changeSortDirection} sortDirection={sortDirection} lastClickedTitle={lastClickedTitle} />
       <TableBody>
         {sortedList.map((info, i) => (
           <TableRow key={i}>
